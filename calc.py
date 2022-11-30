@@ -6,17 +6,17 @@ class Calculator:
     def __init__(self, master):
         master.title("Calculator")
         master.geometry('357x420+0+0')
-        master.config(bg='white')
+        master.config(bg='grey')
         master.resizable(False, False)
 
         self.equation = StringVar()
         self.entry_value = ''
-        Entry(width=17, bg='gray', font=('Arial Bold', 28), textvariable=self.equation).place(x=0, y=0)
+        Entry(width=17, bg='white', font=('Arial Bold', 28), textvariable=self.equation).place(x=0, y=0)
 
-        Button(width=11, height=4, text='(', relief='flat', bg='yellow', command=lambda: self.show('(')).place(x=0,
+        Button(width=24, height=4, text='BACKSPACE', relief='flat', bg='yellow', command=self.backspace).place(x=0,
                                                                                                                y=50)
-        Button(width=11, height=4, text=')', relief='flat', bg='yellow', command=lambda: self.show(')')).place(x=90,
-                                                                                                               y=50)
+        # Button(width=11, height=4, text=')', relief='flat', bg='yellow', command=lambda: self.show(')')).place(x=90,
+        #                                                                                                        y=50)
         Button(width=11, height=4, text='%', relief='flat', bg='yellow', command=lambda: self.show('%')).place(x=180,
                                                                                                                y=50)
         Button(width=11, height=4, text='1', relief='flat', bg='yellow', command=lambda: self.show('1')).place(x=0,
@@ -33,16 +33,16 @@ class Calculator:
                                                                                                                y=200)
         Button(width=11, height=4, text='7', relief='flat', bg='yellow', command=lambda: self.show('7')).place(x=0,
                                                                                                                y=275)
-        Button(width=11, height=4, text='8', relief='flat', bg='yellow', command=lambda: self.show('8')).place(x=180,
+        Button(width=11, height=4, text='8', relief='flat', bg='yellow', command=lambda: self.show('8')).place(x=90,
                                                                                                                y=275)
-        Button(width=11, height=4, text='9', relief='flat', bg='yellow', command=lambda: self.show('9')).place(x=90,
+        Button(width=11, height=4, text='9', relief='flat', bg='yellow', command=lambda: self.show('9')).place(x=180,
                                                                                                                y=275)
         Button(width=11, height=4, text='0', relief='flat', bg='yellow', command=lambda: self.show('0')).place(x=90,
                                                                                                                y=350)
         Button(width=11, height=4, text='.', relief='flat', bg='yellow', command=lambda: self.show('.')).place(x=180,
                                                                                                                y=350)
         Button(width=11, height=4, text='+', relief='flat', bg='yellow', command=lambda: self.show('+')).place(x=270,
-                                                                                                               y=350)
+                                                                                                               y=275)
         Button(width=11, height=4, text='-', relief='flat', bg='yellow', command=lambda: self.show('-')).place(x=270,
                                                                                                                y=200)
         Button(width=11, height=4, text='/', relief='flat', bg='yellow', command=lambda: self.show('/')).place(x=270,
@@ -63,6 +63,10 @@ class Calculator:
     def solve(self):
         result = eval(self.entry_value)
         self.equation.set(result)
+
+    def backspace(self):
+        self.entry_value = self.entry_value[0:-1]
+        self.equation.set(self.entry_value)
 
 
 root = Tk()
